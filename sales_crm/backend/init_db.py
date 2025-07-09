@@ -1,9 +1,18 @@
-# backend/init_db.py
 import sqlite3
+
 
 conn = sqlite3.connect("data/crm.db")
 c = conn.cursor()
 
+conn = sqlite3.connect("data/crm.db")
+c = conn.cursor()
+c.execute("INSERT OR IGNORE INTO users (username, password, role) VALUES (?, ?, ?)", ("admin", "admin123", "admin"))
+c.execute("INSERT OR IGNORE INTO users (username, password, role) VALUES (?, ?, ?)", ("boss", "boss123", "boss"))
+c.execute("INSERT OR IGNORE INTO users (username, password, role) VALUES (?, ?, ?)", ("sales1", "sales123", "user"))
+conn.commit()
+conn.close()
+
+# Users table
 c.execute('''CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE,
@@ -11,6 +20,7 @@ c.execute('''CREATE TABLE IF NOT EXISTS users (
     role TEXT
 )''')
 
+# Opportunities table
 c.execute('''CREATE TABLE IF NOT EXISTS opportunities (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     company TEXT,
@@ -24,6 +34,7 @@ c.execute('''CREATE TABLE IF NOT EXISTS opportunities (
     created_by TEXT
 )''')
 
+# Visit plans table
 c.execute('''CREATE TABLE IF NOT EXISTS visits (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user TEXT,
@@ -33,3 +44,4 @@ c.execute('''CREATE TABLE IF NOT EXISTS visits (
 )''')
 
 conn.commit()
+conn.close()
