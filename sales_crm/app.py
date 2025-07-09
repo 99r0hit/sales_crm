@@ -1,3 +1,6 @@
+from backend.init_db import init_db
+init_db()
+
 import streamlit as st
 from backend.auth import check_login, get_user_role
 
