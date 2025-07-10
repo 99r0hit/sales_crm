@@ -15,6 +15,25 @@ def init_db():
         role TEXT NOT NULL
     )''')
 
+    # --- Create companies table ---
+    c.execute("""CREATE TABLE IF NOT EXISTS companies (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT UNIQUE NOT NULL,
+        turnover TEXT,
+        industry TEXT,
+        generic_info TEXT,
+        hq_location TEXT,
+        purchase_office TEXT,
+        r_and_d_location TEXT,
+        design_location TEXT,
+        manufacturing_location TEXT,
+        website TEXT,
+        country TEXT
+    )""")
+
+
+    
+    
     # Create opportunities table
     c.execute('''CREATE TABLE IF NOT EXISTS opportunities (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
